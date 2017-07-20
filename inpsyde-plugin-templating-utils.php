@@ -125,12 +125,11 @@ function plugin_file_path( $plugin_file, $file ) {
 function plugin_file_uri( $plugin_file, $file ) {
 
 	$base = plugin_file_base_dir( $plugin_file );
+	$base and $base = trailingslashit( $base );
 
 	if ( ! $base || ! file_exists( $base . $file ) ) {
 		return '';
 	}
-
-	$base = trailingslashit( $base );
 
 	return (string) apply_filters( 'plugin_file_uri', plugins_url( $file, $base . 'plugin.php' ), $file, $base );
 }
