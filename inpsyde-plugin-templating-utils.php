@@ -70,6 +70,8 @@ function plugin_template_part( $plugin_file, $slug, $name = null ) {
 	$templates[] = "{$slug}.php";
 	$templates   = apply_filters( "plugin_template_part_templates", $templates, $base, $slug, $name, $plugin_file );
 
+	$base = trailingslashit( $base );
+
 	foreach ( (array) $templates as $template ) {
 		if ( is_string( $template ) && file_exists( $base . $template ) ) {
 			/** @noinspection PhpIncludeInspection */
@@ -102,6 +104,7 @@ function plugin_file_path( $plugin_file, $file ) {
 		return '';
 	}
 
+	$base = trailingslashit( $base );
 	$file = (string) apply_filters( 'plugin_file_path', $base . $file, $file, $base );
 
 	return file_exists( $file ) ? $file : '';
@@ -127,7 +130,9 @@ function plugin_file_uri( $plugin_file, $file ) {
 		return '';
 	}
 
-	return (string) apply_filters( 'plugin_file_uri', plugins_url( $file, "{$base}/plugin.php" ), $file, $base );
+	$base = trailingslashit( $base );
+
+	return (string) apply_filters( 'plugin_file_uri', plugins_url( $file, $base . 'plugin.php' ), $file, $base );
 }
 
 /**
