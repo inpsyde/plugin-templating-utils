@@ -77,6 +77,6 @@ Via Composer, package name is **`inpsyde/plugin-templating-utils`**.
 
 Copyright (c) 2017 Inpsyde GmbH.
 
-"CPT Archives" code is licensed under [MIT license](https://opensource.org/licenses/MIT).
+"Plugin Templating Utils" code is licensed under [MIT license](https://opensource.org/licenses/MIT).
 
 The team at [Inpsyde](https://inpsyde.com) is engineering the Web since 2006.
