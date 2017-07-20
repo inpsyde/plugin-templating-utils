@@ -58,9 +58,9 @@ function plugin_file_base_dir( $plugin_file ) {
  */
 function plugin_template_part( $plugin_file, $slug, $name = null ) {
 
-	list( $base, $plugin_file ) = plugin_file_base_dir( $plugin_file );
+	$base = plugin_file_base_dir( $plugin_file );
 
-	if ( ! $base || ! $plugin_file ) {
+	if ( ! $base ) {
 		return FALSE;
 	}
 
@@ -68,7 +68,7 @@ function plugin_template_part( $plugin_file, $slug, $name = null ) {
 	$name      = (string) $name;
 	$name and $templates[] = "{$slug}-{$name}.php";
 	$templates[] = "{$slug}.php";
-	$templates   = apply_filters( "plugin_template_part_templates", $templates, $plugin_file, $slug, $name );
+	$templates   = apply_filters( "plugin_template_part_templates", $templates, $base, $slug, $name, $plugin_file );
 
 	foreach ( (array) $templates as $template ) {
 		if ( is_string( $template ) && file_exists( $base . $template ) ) {
