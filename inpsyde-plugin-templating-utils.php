@@ -10,7 +10,7 @@
 
 namespace Inpsyde;
 
-if ( function_exists( __NAMESPACE__ . '\\plugin_file_base' ) ) {
+if ( function_exists( __NAMESPACE__ . '\\plugin_file_base_dir' ) ) {
 	return;
 }
 
