@@ -40,7 +40,7 @@ function plugin_file_base_dir( $plugin_file ) {
 		return '';
 	}
 
-	return $matches[ 1 ];
+	return $plugin_dir . '/'. $matches[ 1 ];
 }
 
 /**
