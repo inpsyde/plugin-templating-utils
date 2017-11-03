@@ -16,10 +16,15 @@ to root directory of the plugin.
 ### `Inpsyde\plugin_template_part()`
 
 Similar to `get_template_part()` loads a template from a plugin directory.
-The plugin to load template from is obtained from first argument, that can be a file in the target plugin directory,
+The plugin folder where to search is obtained from first argument, that can be a file in the target plugin directory,
 no matter how deep in the directory three.
 
 Templates to be searched pass through `'plugin_template_part_templates'` filter.
+
+
+### `Inpsyde\find_plugin_template_part()`
+
+Similar to `plugin_template_part()` (also trigger same filter) it returns the path of found template instead of including it.
 
 
 ### `Inpsyde\plugin_file_path()`

@@ -44,24 +44,24 @@ function plugin_file_base_dir( $plugin_file ) {
 }
 
 /**
- * Similar to `get_template_part()` loads a template from a plugin directory.
- * The plugin to load template from is obtained from first argument, that can be a file in the target plugin directory,
+ * Look for a template from a plugin directory.
+ * The plugin folder where to search is obtained from first argument, that can be a file in the target plugin directory,
  * no matter how deep in the directory three.
  *
  * @param string $plugin_file
  * @param string $slug
  * @param null   $name
  *
- * @return bool
+ * @return string
  *
- * @since 0.1.0
+ * @since 0.2.0
  */
-function plugin_template_part( $plugin_file, $slug, $name = null ) {
+function find_plugin_template_part( $plugin_file, $slug, $name = null ) {
 
 	$base = plugin_file_base_dir( $plugin_file );
 
 	if ( ! $base ) {
-		return FALSE;
+		return '';
 	}
 
 	$templates = [];
@@ -74,11 +74,35 @@ function plugin_template_part( $plugin_file, $slug, $name = null ) {
 
 	foreach ( (array) $templates as $template ) {
 		if ( is_string( $template ) && file_exists( $base . $template ) ) {
-			/** @noinspection PhpIncludeInspection */
-			include $base . $template;
-
-			return TRUE;
+			return $base . $template;
 		}
+	}
+
+	return '';
+}
+
+/**
+ * Similar to `get_template_part()` loads a template from a plugin directory.
+ * The plugin folder where to search is obtained from first argument, that can be a file in the target plugin directory,
+ * no matter how deep in the directory three.
+ *
+ * @param string $plugin_file
+ * @param string $slug
+ * @param null   $name
+ *
+ * @return bool
+ *
+ * @since 0.1.0
+ */
+function plugin_template_part( $plugin_file, $slug, $name = null ) {
+
+	$template = find_plugin_template_part( $plugin_file, $slug, $name );
+
+	if ( $template ) {
+		/** @noinspection PhpIncludeInspection */
+		include $template;
+
+		return TRUE;
 	}
 
 	return FALSE;
