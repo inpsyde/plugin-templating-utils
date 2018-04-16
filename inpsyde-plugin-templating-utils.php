@@ -30,11 +30,11 @@ function plugin_file_base_dir( $plugin_file ) {
 	$plugin_dir  = untrailingslashit( wp_normalize_path( WP_PLUGIN_DIR ) );
 	$plugin_file = wp_normalize_path( $plugin_file );
 
-	foreach ( $wp_plugin_paths as $dir => $real_dir ) {
-		if ( strpos( $plugin_file, $real_dir ) === 0 ) {
-			$plugin_file = $dir . substr( $plugin_file, strlen( $real_dir ) );
-		}
-	}
+    foreach ( $wp_plugin_paths as $dir => $real_dir ) {
+        if ( strpos( $plugin_file, $real_dir ) === 0 ) {
+            return $dir;
+        }
+    }
 
 	if ( ! preg_match( '#^' . preg_quote( $plugin_dir, '#' ) . '/([^/]+)/.+?\.php$#', $plugin_file, $matches ) ) {
 		return '';
