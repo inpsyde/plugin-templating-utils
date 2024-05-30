@@ -1,7 +1,7 @@
 # Changelog
 
 ## 0.3.0
-- Add the possibility to pass an `$args` array to `plugin_template_part()` and `plugin_template_part_fallback()` similarly to what `get_template_part()` allows since WP 5.5.
+- Add the possibility to pass an `$args` array to `plugin_template_part()`, `find_plugin_template_part()` and `plugin_template_part_fallback()` similarly to what was introduced in WP 5.5 for `get_template_part()`.
 
 ## 0.2.1
 - Fixed a bug when plugins real path is outside content path and symlinked inside.
