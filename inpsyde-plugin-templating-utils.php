@@ -51,12 +51,13 @@ function plugin_file_base_dir( $plugin_file ) {
  * @param string $plugin_file
  * @param string $slug
  * @param null   $name
+ * @param array  $args
  *
  * @return string
  *
  * @since 0.2.0
  */
-function find_plugin_template_part( $plugin_file, $slug, $name = null ) {
+function find_plugin_template_part( $plugin_file, $slug, $name = null, array $args = [] ) {
 
 	$base = plugin_file_base_dir( $plugin_file );
 
@@ -68,7 +69,7 @@ function find_plugin_template_part( $plugin_file, $slug, $name = null ) {
 	$name      = (string) $name;
 	$name and $templates[] = "{$slug}-{$name}.php";
 	$templates[] = "{$slug}.php";
-	$templates   = apply_filters( "plugin_template_part_templates", $templates, $base, $slug, $name, $plugin_file );
+	$templates   = apply_filters( "plugin_template_part_templates", $templates, $base, $slug, $name, $plugin_file, $args );
 
 	$base = trailingslashit( $base );
 
@@ -89,14 +90,15 @@ function find_plugin_template_part( $plugin_file, $slug, $name = null ) {
  * @param string $plugin_file
  * @param string $slug
  * @param null   $name
+ * @param array  $args
  *
  * @return bool
  *
  * @since 0.1.0
  */
-function plugin_template_part( $plugin_file, $slug, $name = null ) {
+function plugin_template_part( $plugin_file, $slug, $name = null, array $args = [] ) {
 
-	$template = find_plugin_template_part( $plugin_file, $slug, $name );
+	$template = find_plugin_template_part( $plugin_file, $slug, $name, $args );
 
 	if ( $template ) {
 		/** @noinspection PhpIncludeInspection */
@@ -165,13 +167,14 @@ function plugin_file_uri( $plugin_file, $file ) {
  * @param string      $slug
  * @param string|null $name
  * @param string|null $theme_slug
+ * @param array       $args
  *
  * @since 0.1.0
  */
-function plugin_template_part_fallback( $plugin_file, $slug, $name = null, $theme_slug = null ) {
+function plugin_template_part_fallback( $plugin_file, $slug, $name = null, $theme_slug = null, array $args = [] ) {
 
-	if ( ! plugin_template_part( $plugin_file, $slug, $name ) ) {
-		get_template_part( $theme_slug ? : $slug, $name );
+	if ( ! plugin_template_part( $plugin_file, $slug, $name, $args ) ) {
+		get_template_part( $theme_slug ? : $slug, $name, $args );
 	}
 }
 
